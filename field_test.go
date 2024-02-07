@@ -55,3 +55,17 @@ func TestField_Cell_withCoordinatesBeyondMaximum(test *testing.T) {
 
 	assert.True(test, result)
 }
+
+func TestField_SetCell(test *testing.T) {
+	field := Field{
+		[]bool{false, false, false},
+		[]bool{false, false, false},
+	}
+	field.SetCell(2, 1, true)
+
+	expectedField := Field{
+		[]bool{false, false, false},
+		[]bool{false, false, true},
+	}
+	assert.Equal(test, expectedField, field)
+}

@@ -16,6 +16,10 @@ func (field Field) Cell(column int, row int) bool {
 	return field[row][column]
 }
 
+func (field Field) SetCell(column int, row int, value bool) {
+	field[row][column] = value
+}
+
 func wrapAroundModulus(number int, modulus int) int {
 	number += modulus
 	return number % modulus
