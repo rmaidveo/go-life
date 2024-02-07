@@ -25,3 +25,33 @@ func TestField_Heigth(test *testing.T) {
 
 	assert.Equal(test, 2, result)
 }
+
+func TestField_Cell(test *testing.T) {
+	field := Field{
+		[]bool{false, false, false},
+		[]bool{false, false, true},
+	}
+	result := field.Cell(2, 1)
+
+	assert.True(test, result)
+}
+
+func TestField_Cell_withCoordinatesBeyondMinimum(test *testing.T) {
+	field := Field{
+		[]bool{false, false, false},
+		[]bool{false, true, false},
+	}
+	result := field.Cell(-2, -1)
+
+	assert.True(test, result)
+}
+
+func TestField_Cell_withCoordinatesBeyondMaximum(test *testing.T) {
+	field := Field{
+		[]bool{false, false, false},
+		[]bool{false, true, false},
+	}
+	result := field.Cell(4, 3)
+
+	assert.True(test, result)
+}

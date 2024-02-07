@@ -9,3 +9,14 @@ func (field Field) Width() int {
 func (field Field) Height() int {
 	return len(field)
 }
+
+func (field Field) Cell(column int, row int) bool {
+	column = wrapAroundModulus(column, field.Width())
+	row = wrapAroundModulus(row, field.Height())
+	return field[row][column]
+}
+
+func wrapAroundModulus(number int, modulus int) int {
+	number += modulus
+	return number % modulus
+}
