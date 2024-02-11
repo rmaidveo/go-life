@@ -6,6 +6,16 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestNewField(test *testing.T) {
+	actualResult := NewField(3, 2)
+
+	expectedResult := Field{
+		[]bool{false, false, false},
+		[]bool{false, false, false},
+	}
+	assert.Equal(test, expectedResult, actualResult)
+}
+
 func TestField_Width(test *testing.T) {
 	field := Field{
 		[]bool{false, false, false},

@@ -2,6 +2,15 @@ package life
 
 type Field [][]bool
 
+func NewField(width int, hieght int) Field {
+	field := make(Field, hieght)
+	for index := range field {
+		field[index] = make([]bool, width)
+	}
+
+	return field
+}
+
 func (field Field) Width() int {
 	return len(field[0])
 }
