@@ -1,6 +1,9 @@
 package life
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 const (
 	deadCellRepresentation  = '.'
@@ -16,6 +19,39 @@ func NewField(width int, hieght int) Field {
 	}
 
 	return field
+}
+
+func ParseField(text string) (Field, error) {
+	var field Field
+	lines := strings.Split(text, "\n")
+	width := -1
+	for index, line := range lines {
+		if line == "" || line[0] == '!' {
+			continue
+		}
+
+		if width == -1 {
+			width = len(line)
+		} else if len(line) != width {
+			return nil, fmt.Errorf("inconsistent length of line %d", index)
+		}
+
+		var row []bool
+		for _, character := range line {
+			switch character {
+			case deadCellRepresentation:
+				row = append(row, false)
+			case aliveCellRepresentation:
+				row = append(row, true)
+			default:
+				return nil, fmt.Errorf("unknown character %q", character)
+			}
+		}
+
+		field = append(field, row)
+	}
+
+	return field, nil
 }
 
 func (field Field) Width() int {

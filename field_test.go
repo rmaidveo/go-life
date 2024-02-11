@@ -171,3 +171,30 @@ func TestField_String(test *testing.T) {
 
 	assert.Equal(test, ".O.\n..O\nOOO\n", result)
 }
+
+func TestParseField_succses(test *testing.T) {
+	text := "!comment #1\n!comment #2\n.O.\n\n..O\nOOO"
+	actualResult, err := ParseField(text)
+
+	expectedResult := Field{
+		[]bool{false, true, false},
+		[]bool{false, false, true},
+		[]bool{true, true, true},
+	}
+	assert.Equal(test, expectedResult, actualResult)
+	assert.NoError(test, err)
+}
+
+func TestParseField_error_unknownCharacter(test *testing.T) {
+	result, err := ParseField(".O.\n..*\nOOO")
+
+	assert.Nil(test, result)
+	assert.EqualError(test, err, "unknown character '*'")
+}
+
+func TestParseField_error_inconsistentLengthOfLine(test *testing.T) {
+	result, err := ParseField(".O.\n..\nOOO")
+
+	assert.Nil(test, result)
+	assert.EqualError(test, err, "inconsistent length of line 1")
+}
