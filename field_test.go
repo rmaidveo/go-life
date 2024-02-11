@@ -140,3 +140,23 @@ func TestField_NextCell_willDie(test *testing.T) {
 
 	assert.False(test, result)
 }
+
+func TestField_NextField(test *testing.T) {
+	field := Field{
+		[]bool{false, false, false, false, false},
+		[]bool{false, false, true, false, false},
+		[]bool{false, false, false, true, false},
+		[]bool{false, true, true, true, false},
+		[]bool{false, false, false, false, false},
+	}
+	actualField := field.NextField()
+
+	expectedNextField := Field{
+		[]bool{false, false, false, false, false},
+		[]bool{false, false, false, false, false},
+		[]bool{false, true, false, true, false},
+		[]bool{false, false, true, true, false},
+		[]bool{false, false, true, false, false},
+	}
+	assert.Equal(test, expectedNextField, actualField)
+}

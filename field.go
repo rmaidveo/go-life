@@ -54,6 +54,18 @@ func (field Field) NextCell(column int, row int) bool {
 	return willBeBorn || willSurvive
 }
 
+func (field Field) NextField() Field {
+	nextField := NewField(field.Width(), field.Height())
+	for y := 0; y < field.Height(); y++ {
+		for x := 0; x < field.Width(); x++ {
+			nextCell := field.NextCell(x, y)
+			nextField.SetCell(x, y, nextCell)
+		}
+	}
+
+	return nextField
+}
+
 func wrapAroundModulus(number int, modulus int) int {
 	number += modulus
 	return number % modulus
