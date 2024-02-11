@@ -160,3 +160,14 @@ func TestField_NextField(test *testing.T) {
 	}
 	assert.Equal(test, expectedNextField, actualField)
 }
+
+func TestField_String(test *testing.T) {
+	field := Field{
+		[]bool{false, true, false},
+		[]bool{false, false, true},
+		[]bool{true, true, true},
+	}
+	result := field.String()
+
+	assert.Equal(test, ".O.\n..O\nOOO\n", result)
+}
