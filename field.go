@@ -12,8 +12,8 @@ const (
 
 type Field [][]bool
 
-func NewField(width int, hieght int) Field {
-	field := make(Field, hieght)
+func NewField(width int, height int) Field {
+	field := make(Field, height)
 	for index := range field {
 		field[index] = make([]bool, width)
 	}
